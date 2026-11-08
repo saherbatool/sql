@@ -1,0 +1,67 @@
+erDiagram
+    SPECIALTIES ||--o{ CLINICIANS : specialty_id
+    PATIENTS ||--o{ APPOINTMENTS : patient_id
+    CLINICIANS ||--o{ APPOINTMENTS : clinician_id
+    CLINICS ||--o{ APPOINTMENTS : clinic_id
+    APPOINTMENTS ||--o{ DIAGNOSES : appointment_id
+    APPOINTMENTS ||--o{ PRESCRIPTIONS : appointment_id
+    APPOINTMENTS ||--o| FOLLOWUPS : appointment_id
+    PRESCRIPTIONS ||--|{ PRESCRIPTION_ITEMS : prescription_id
+    MEDICINES ||--o{ PRESCRIPTION_ITEMS : medicine_id
+
+    SPECIALTIES {
+        INT specialty_id PK
+        VARCHAR specialty_name UK
+    }
+    CLINICIANS {
+        INT clinician_id PK
+        VARCHAR full_name
+        INT specialty_id FK
+    }
+    PATIENTS {
+        CHAR patient_id PK
+        VARCHAR full_name
+        VARCHAR postcode
+    }
+    CLINICS {
+        INT clinic_id PK
+        VARCHAR clinic_name UK
+    }
+    APPOINTMENTS {
+        INT appointment_id PK
+        CHAR patient_id FK
+        INT clinician_id FK
+        INT clinic_id FK
+        DATE appointment_date
+        TIME appointment_time
+        VARCHAR notes
+    }
+    DIAGNOSES {
+        INT diagnosis_id PK
+        INT appointment_id FK
+        VARCHAR diagnosis_text
+    }
+    PRESCRIPTIONS {
+        INT prescription_id PK
+        INT appointment_id FK
+        DATE issued_date
+    }
+    PRESCRIPTION_ITEMS {
+        INT prescription_id PK,FK
+        INT medicine_id PK,FK
+        VARCHAR dose
+        VARCHAR route
+        VARCHAR frequency
+        SMALLINT duration_days
+    }
+    MEDICINES {
+        INT medicine_id PK
+        VARCHAR medicine_name UK
+    }
+    FOLLOWUPS {
+        INT followup_id PK
+        INT appointment_id FK,UK
+        DATE due_date
+        ENUM priority
+        ENUM status
+    }

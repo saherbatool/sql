@@ -1,0 +1,10 @@
+erDiagram
+    SPECIALTIES ||--o{ CLINICIANS : classifies
+    PATIENTS ||--o{ APPOINTMENTS : attends
+    CLINICIANS ||--o{ APPOINTMENTS : conducts
+    CLINICS ||--o{ APPOINTMENTS : hosts
+    APPOINTMENTS ||--o{ DIAGNOSES : results_in
+    APPOINTMENTS ||--o{ PRESCRIPTIONS : issues
+    APPOINTMENTS ||--o| FOLLOWUPS : schedules
+    PRESCRIPTIONS ||--|{ PRESCRIPTION_ITEMS : contains
+    MEDICINES ||--o{ PRESCRIPTION_ITEMS : appears_in
